@@ -1,16 +1,16 @@
-import { Router } from "express"; 
-import { crearProducto, listarProductos } from "../controllers/productos.controllers";
+import { Router } from "express";
+import {
+  crearProducto,
+  listarProductos,
+} from "../controllers/productos.controllers";
 
 const rutas = Router();
 
-rutas.route("/productos").get(listarProductos).post(crearProducto)
+rutas.route("/productos").get(listarProductos).post(crearProducto);
 
-
+rutas.route("/productos/:id").get().put().delete();
 
 export default rutas;
-
-
-
 
 // app.get("/productos", (ruq, res)=>{
 //     res.send("Aqui tengo que retornar un arreglo de productos")
