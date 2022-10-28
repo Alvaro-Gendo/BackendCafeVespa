@@ -4,6 +4,7 @@ import {
   crearProducto,
   editarProducto,
   listarProductos,
+  obetenerProducto,
 } from "../controllers/productos.controllers";
 import { check } from "express-validator";
 
@@ -42,7 +43,7 @@ rutas.route("/productos")
 ],crearProducto);
 
 rutas.route("/productos/:id")
-.get()
+.get(obetenerProducto)
 .put(editarProducto)
 .delete(borrarProducto);
 
