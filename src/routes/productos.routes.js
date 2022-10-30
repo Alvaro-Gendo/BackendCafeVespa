@@ -27,7 +27,7 @@ rutas.route("/productos")
     if(valor >= 1 && valor <= 1000){
       return true
     }else{
-      throw new Error("El precio estar entre 1 y 1000")
+      throw new Error("El precio debe estar entre 1 y 1000")
     }
   }),
   check("imagen")
@@ -44,7 +44,25 @@ rutas.route("/productos")
 
 rutas.route("/productos/:id")
 .get(obetenerProducto)
-.put(editarProducto)
+.put([
+  check("nombreProducto")
+  .notEmpty()
+  .withMessage("Campo obligatorio")
+  .isLength({min:2, max:50})
+  .withMessage("El nombre del producto debe tener entre 2 y 50 caracteres"),
+  check("precio")
+  .notEmpty()
+  .withMessage("Campo obligatorio")
+  .isNumeric()
+  .withMessage("El precio debe ser un numero")
+  .custom((valor)=>{
+    if(valor >= 1 && valor <= 1000){
+      return true
+    }else{
+      throw new Error("EL precio debe estar entre 1 y 1000")
+    }
+  })
+],editarProducto)
 .delete(borrarProducto);
 
 export default rutas;

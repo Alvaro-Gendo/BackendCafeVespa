@@ -62,7 +62,9 @@ export const obetenerProducto = async (req, res) =>{
 
 export const editarProducto = async(req, res) =>{
   try {
+    //buscar el producto por el id, luego modifical los datos con el body
     await Producto.findByIdAndUpdate(req.params.id, req.body);
+    //responder al frontend
     res.status(200).json({
       message: "El producto fue editado correctamente"
     })
